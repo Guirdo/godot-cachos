@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnfgcuepjyihr"]
+[gd_scene load_steps=4 format=3 uid="uid://cnfgcuepjyihr"]
 
 [ext_resource type="PackedScene" uid="uid://b2wwxio5v3b77" path="res://scenes/characters/mask-guy.tscn" id="1_srxg5"]
+[ext_resource type="PackedScene" uid="uid://6wetmuk7grs5" path="res://scenes/screens/parallax_background.tscn" id="1_w6iy1"]
 [ext_resource type="PackedScene" uid="uid://btag6igsf84td" path="res://scenes/maps/map_1.tscn" id="2_i4l7v"]
 
 [node name="Node2D" type="Node2D"]
 
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_w6iy1")]
+
 [node name="TileMap" parent="." instance=ExtResource("2_i4l7v")]
 
 [node name="MaskGuy" parent="." instance=ExtResource("1_srxg5")]
+position = Vector2(199, 255)

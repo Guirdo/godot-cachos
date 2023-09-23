@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://6wetmuk7grs5"]
+
+[ext_resource type="Texture2D" uid="uid://b82aiwuumpxvs" path="res://assets/Background/parallax-space-backgound.png" id="1_ikmhv"]
+[ext_resource type="Texture2D" uid="uid://cnyb60vrx6xnh" path="res://assets/Background/parallax-space-big-planet.png" id="2_o34x5"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Parallax-space-backgound" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(575, 322.75)
+scale = Vector2(4.24265, 4.06562)
+texture = ExtResource("1_ikmhv")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Parallax-space-big-planet" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(930, 250)
+texture = ExtResource("2_o34x5")
+
+[node name="Parallax-space-big-planet2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(458, 422)
+texture = ExtResource("2_o34x5")
+
+[node name="Parallax-space-big-planet3" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(122, 122)
+texture = ExtResource("2_o34x5")
