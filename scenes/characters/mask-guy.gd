@@ -4,6 +4,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var appeared:bool = false
+var leaved_floor:bool = false
+var had_jumped:bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,12 +14,20 @@ func _ready():
 	$AnimatedSprite2D.play("appearing")
 
 func _physics_process(delta):
+	if is_on_floor():
+		leaved_floor = false
+		had_jumped = false
+	
 	# Add the gravity.
 	if not is_on_floor():
+		if not leaved_floor:
+			$coyote_timer.start()
+			leaved_floor = true
+		
 		velocity.y += gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and right_to_jump():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -30,7 +40,6 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	decide_animation()
-	
 	move_and_slide()
 	
 
@@ -48,8 +57,20 @@ func decide_animation():
 		$AnimatedSprite2D.play("fall")
 	elif velocity.y < 0:
 		$AnimatedSprite2D.play("jump")
+		
+func right_to_jump():
+	if had_jumped: return false
+	if is_on_floor():
+		had_jumped = true
+		return true
+	elif not $coyote_timer.is_stopped():
+		had_jumped = true
+		return true
 
 
 func _on_animated_sprite_2d_animation_finished():
 	if $AnimatedSprite2D.animation == "appearing":
 		appeared = true
+
+func _on_coyote_timer_timeout():
+	pass
