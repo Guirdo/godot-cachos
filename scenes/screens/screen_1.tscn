@@ -1,8 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnfgcuepjyihr"]
+[gd_scene load_steps=9 format=3 uid="uid://cnfgcuepjyihr"]
 
 [ext_resource type="PackedScene" uid="uid://b2wwxio5v3b77" path="res://scenes/characters/mask-guy.tscn" id="1_srxg5"]
 [ext_resource type="PackedScene" uid="uid://6wetmuk7grs5" path="res://scenes/screens/parallax_background.tscn" id="1_w6iy1"]
 [ext_resource type="PackedScene" uid="uid://btag6igsf84td" path="res://scenes/maps/map_1.tscn" id="2_i4l7v"]
+[ext_resource type="PackedScene" uid="uid://63j5uu0xra6g" path="res://scenes/environment/moving_platform_1.tscn" id="4_isum3"]
+
+[sub_resource type="Curve2D" id="Curve2D_0i4qq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -233.5, -2, 0, 0, 0, 0, 24, -2)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_16yaq"]
+resource_name = "regular_move"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_p4mgb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g68w8"]
+_data = {
+"RESET": SubResource("Animation_p4mgb"),
+"regular_move": SubResource("Animation_16yaq")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -12,3 +57,22 @@
 
 [node name="MaskGuy" parent="." instance=ExtResource("1_srxg5")]
 position = Vector2(1163, 232)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(935, 292)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_0i4qq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-233.5, -2)
+scale = Vector2(0.5, 0.5)
+
+[node name="moving_platform_1" parent="Path2D/PathFollow2D" instance=ExtResource("4_isum3")]
+scale = Vector2(2, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D"]
+autoplay = "regular_move"
+speed_scale = 0.3
+libraries = {
+"": SubResource("AnimationLibrary_g68w8")
+}

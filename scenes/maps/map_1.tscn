@@ -914,4 +914,5 @@ layer_0/tile_data = PackedInt32Array(1179648, 458752, 0, 1245184, 458752, 1, 131
 [node name="wall_jump_tile" type="TileMap" parent="." groups=["wall_jump"]]
 tile_set = SubResource("TileSet_6mxma")
 format = 2
-layer_0/tile_data = PackedInt32Array(1638475, 1114112, 9, 1704011, 1114112, 9, 1769554, 1114112, 9, 1769547, 1114112, 9, 1900626, 1114112, 9, 1835090, 1114112, 9)
+layer_0/tile_data = PackedInt32Array(1704011, 1114112, 9, 1638475, 1114112, 9, 1572939, 1114112, 9, 1704018, 1114112, 9, 1835090, 1114112, 9, 1769554, 1114112, 9)
+metadata/_edit_lock_ = true
