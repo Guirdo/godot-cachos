@@ -11,4 +11,4 @@
 [node name="TileMap" parent="." instance=ExtResource("2_i4l7v")]
 
 [node name="MaskGuy" parent="." instance=ExtResource("1_srxg5")]
-position = Vector2(199, 255)
+position = Vector2(1163, 232)
