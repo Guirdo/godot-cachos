@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://b2wwxio5v3b77"]
+[gd_scene load_steps=71 format=3 uid="uid://b2wwxio5v3b77"]
 
 [ext_resource type="Script" path="res://scenes/characters/mask-guy.gd" id="1_asebp"]
 [ext_resource type="Texture2D" uid="uid://x6u07wg6r3jl" path="res://assets/Main Characters/Appearing (96x96).png" id="1_bstgn"]
@@ -461,8 +461,13 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2p8pc"]
 height = 29.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4n4e3"]
+radius = 8.5
+height = 24.0
+
 [node name="MaskGuy" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 16
 script = ExtResource("1_asebp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -470,6 +475,7 @@ sprite_frames = SubResource("SpriteFrames_r6cod")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("CapsuleShape2D_2p8pc")
 
@@ -486,5 +492,14 @@ one_shot = true
 [node name="ray_cast_wall_jump" type="RayCast2D" parent="."]
 target_position = Vector2(10.5, 0)
 
+[node name="damage_detection" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_detection"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("CapsuleShape2D_4n4e3")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="area_shape_entered" from="damage_detection" to="." method="_on_damage_detection_area_shape_entered"]

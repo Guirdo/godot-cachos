@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnfgcuepjyihr"]
+[gd_scene load_steps=10 format=3 uid="uid://cnfgcuepjyihr"]
 
 [ext_resource type="PackedScene" uid="uid://b2wwxio5v3b77" path="res://scenes/characters/mask-guy.tscn" id="1_srxg5"]
 [ext_resource type="PackedScene" uid="uid://6wetmuk7grs5" path="res://scenes/screens/parallax_background.tscn" id="1_w6iy1"]
 [ext_resource type="PackedScene" uid="uid://btag6igsf84td" path="res://scenes/maps/map_1.tscn" id="2_i4l7v"]
 [ext_resource type="PackedScene" uid="uid://63j5uu0xra6g" path="res://scenes/environment/moving_platform_1.tscn" id="4_isum3"]
+[ext_resource type="PackedScene" uid="uid://bbk1fcklu55mh" path="res://scenes/enemies/saw.tscn" id="5_ln8bi"]
 
 [sub_resource type="Curve2D" id="Curve2D_0i4qq"]
 _data = {
@@ -76,3 +77,6 @@ speed_scale = 0.3
 libraries = {
 "": SubResource("AnimationLibrary_g68w8")
 }
+
+[node name="Saw" parent="." instance=ExtResource("5_ln8bi")]
+position = Vector2(1575, 478)

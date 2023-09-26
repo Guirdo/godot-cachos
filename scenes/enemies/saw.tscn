@@ -1,0 +1,104 @@
+[gd_scene load_steps=14 format=3 uid="uid://bbk1fcklu55mh"]
+
+[ext_resource type="Script" path="res://scenes/enemies/saw.gd" id="1_h0rb6"]
+[ext_resource type="Texture2D" uid="uid://cqrkgjd6cvjht" path="res://assets/Traps/Saw/On (38x38).png" id="1_ljoi1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rm8f"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp68f"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcoww"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(76, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrrc3"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(114, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjhvs"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(152, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fbm0"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(190, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yful"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(228, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2urrm"]
+atlas = ExtResource("1_ljoi1")
+region = Rect2(266, 0, 38, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bevs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rm8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp68f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcoww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrrc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjhvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fbm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yful")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2urrm")
+}],
+"loop": true,
+"name": &"on",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5epl"]
+size = Vector2(10, 2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dfb6b"]
+radius = 18.527
+
+[node name="Saw" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+script = ExtResource("1_h0rb6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0bevs")
+animation = &"on"
+autoplay = "on"
+frame = 2
+frame_progress = 0.834603
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_g5epl")
+
+[node name="ray_cast_floor_detection" type="RayCast2D" parent="."]
+position = Vector2(20, -7)
+target_position = Vector2(0, 10)
+
+[node name="ray_cast_wall_detection" type="RayCast2D" parent="."]
+target_position = Vector2(20, 0)
+
+[node name="damage_zone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone"]
+shape = SubResource("CircleShape2D_dfb6b")
