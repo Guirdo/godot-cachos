@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://uhlyt3spgix0"]
+
+[ext_resource type="Texture2D" uid="uid://cle310vd363pj" path="res://assets/Traps/Trampoline/Idle.png" id="1_1humk"]
+[ext_resource type="Script" path="res://scenes/environment/trampoline.gd" id="1_i187w"]
+[ext_resource type="Texture2D" uid="uid://woo2b76bt2th" path="res://assets/Traps/Trampoline/Jump (28x28).png" id="2_h3d0n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dm5ps"]
+atlas = ExtResource("1_1humk")
+region = Rect2(0, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yo2v"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(0, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke6r7"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(28, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o04uv"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(56, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ps7u"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(84, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qliy"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(112, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do274"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(140, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kxi1"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(168, 0, 28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up7ku"]
+atlas = ExtResource("2_h3d0n")
+region = Rect2(196, 0, 28, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jqgiv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dm5ps")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yo2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke6r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o04uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ps7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qliy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do274")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kxi1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up7ku")
+}],
+"loop": false,
+"name": &"launch",
+"speed": 11.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l40t4"]
+size = Vector2(20, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laxhg"]
+size = Vector2(21.375, 9)
+
+[node name="trampoline" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_i187w")
+
+[node name="animation_trampoline" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jqgiv")
+animation = &"launch"
+frame = 7
+frame_progress = 1.0
+
+[node name="activation_area" type="Area2D" parent="."]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="activation_area"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_l40t4")
+
+[node name="body_colliction" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body_colliction"]
+position = Vector2(-0.3125, 9)
+shape = SubResource("RectangleShape2D_laxhg")
+
+[connection signal="body_entered" from="activation_area" to="." method="_on_activation_area_body_entered"]

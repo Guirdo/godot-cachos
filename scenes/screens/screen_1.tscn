@@ -1,16 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnfgcuepjyihr"]
+[gd_scene load_steps=11 format=3 uid="uid://cnfgcuepjyihr"]
 
 [ext_resource type="PackedScene" uid="uid://b2wwxio5v3b77" path="res://scenes/characters/mask-guy.tscn" id="1_srxg5"]
 [ext_resource type="PackedScene" uid="uid://6wetmuk7grs5" path="res://scenes/screens/parallax_background.tscn" id="1_w6iy1"]
 [ext_resource type="PackedScene" uid="uid://btag6igsf84td" path="res://scenes/maps/map_1.tscn" id="2_i4l7v"]
 [ext_resource type="PackedScene" uid="uid://63j5uu0xra6g" path="res://scenes/environment/moving_platform_1.tscn" id="4_isum3"]
 [ext_resource type="PackedScene" uid="uid://bbk1fcklu55mh" path="res://scenes/enemies/saw.tscn" id="5_ln8bi"]
+[ext_resource type="PackedScene" uid="uid://uhlyt3spgix0" path="res://scenes/environment/trampoline.tscn" id="6_cdm8l"]
 
 [sub_resource type="Curve2D" id="Curve2D_0i4qq"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -233.5, -2, 0, 0, 0, 0, 24, -2)
 }
 point_count = 2
+
+[sub_resource type="Animation" id="Animation_p4mgb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_16yaq"]
 resource_name = "regular_move"
@@ -29,21 +45,6 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_p4mgb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g68w8"]
 _data = {
 "RESET": SubResource("Animation_p4mgb"),
@@ -57,7 +58,7 @@ _data = {
 [node name="TileMap" parent="." instance=ExtResource("2_i4l7v")]
 
 [node name="MaskGuy" parent="." instance=ExtResource("1_srxg5")]
-position = Vector2(1163, 232)
+position = Vector2(1407, 135)
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(935, 292)
@@ -80,3 +81,6 @@ libraries = {
 
 [node name="Saw" parent="." instance=ExtResource("5_ln8bi")]
 position = Vector2(1575, 478)
+
+[node name="trampoline" parent="." instance=ExtResource("6_cdm8l")]
+position = Vector2(1909, 356)
