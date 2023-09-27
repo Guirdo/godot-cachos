@@ -13,4 +13,4 @@ func _process(delta):
 
 func _on_activation_area_body_entered(body):
 	$animation_trampoline.play("launch")
-	body.velocity.y = -900
+	body.velocity.y = -800
